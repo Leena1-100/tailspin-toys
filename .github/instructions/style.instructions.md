@@ -46,6 +46,12 @@ ALL UI components MUST use dark theme colors:
 - Use semantic grouping: layout, spacing, colors, typography
 - Keep utility combinations readable and maintainable
 
+## TypeScript and Formatting Standards
+
+- Use the project’s established TypeScript style in source files: semicolons, single quotes, and explicit types for exported functions and props.
+- Keep formatting consistent with the rest of the codebase: 4-space indentation in TypeScript, readable line wrapping, and small, single-purpose functions.
+- When a change introduces a new rule or style constraint, prefer enforcing it through ESLint rather than ad hoc manual review. The repository already relies on TypeScript and Astro recommended ESLint rules for consistency.
+
 ## Modern UI Patterns
 
 - Rounded corners: `rounded-lg`, `rounded-xl`, `rounded-2xl`
