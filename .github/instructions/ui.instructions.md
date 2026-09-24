@@ -20,6 +20,14 @@ Refer to technology-specific instruction files:
 
 ## Core Principles
 
+### Commenting and Documentation Standards
+
+- Comment the intent, not the mechanics. Explain why a decision exists, what edge case it covers, or what trade-off it reflects. Do not restate what the code already says in plain English.
+- Remove comments that merely paraphrase the lines below them. If the code is already obvious, prefer no comment at all.
+- Write documentation when behavior is non-obvious, risky, or domain-specific: data contracts, invariants, and reasoning behind unusual workarounds.
+- Keep comments current. When a change alters the surrounding code, update or delete the comment in the same change; outdated comments are treated as bugs.
+- For reusable APIs, prefer self-documenting names and type signatures, then add JSDoc/TSDoc only where the purpose, parameters, and return value need clarification.
+
 ### Testability
 
 - Every interactive element MUST include a `data-testid` attribute

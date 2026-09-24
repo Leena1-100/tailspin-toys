@@ -45,15 +45,31 @@ import { asc, count, eq } from 'drizzle-orm';
 import type { Database } from './db';
 import { games } from '../../db/schema';
 
+/**
+ * Returns every game id in a stable title order.
+ *
+ * @param db The Drizzle database instance used for the query.
+ * @returns A list of game ids sorted alphabetically by title for deterministic builds.
+ */
 export async function getAllGameIds(db: Database): Promise<number[]> {
   const rows = await db.select({ id: games.id }).from(games).orderBy(asc(games.title));
   return rows.map((r) => r.id);
 }
 ```
 
+- Every exported function in `db/` and `src/lib/` must have a TSDoc/JSDoc block that explains its purpose, each parameter, and the return value.
+- Document the injectable `db` argument clearly when a helper depends on the database instance for testing and page data access.
+- Keep TSDoc in sync with the implementation; stale docs are treated as bugs.
 - Always `order by` a stable column (title) so static builds are deterministic.
 - Map raw rows to the app-facing `Game`/`Publisher`/`Category` types in one place; don't leak Drizzle row shapes into components.
 - Keep ordering/lookup logic in `games.ts`, not in pages.
+
+## TypeScript formatting and linting
+
+- Use TypeScript with explicit parameter and return types on exported helpers and public functions.
+- Follow the repository's existing style: semicolons, single quotes, and 4-space indentation consistent with the codebase.
+- Prefer descriptive names, small pure functions, and `const`/`type` declarations over loose `any` usage.
+- Run `npm run lint` regularly; the repo's ESLint config enforces the recommended TypeScript and Astro rules, plus no-unused-vars checks for intentionally ignored parameters.
 
 ## Determinism
 
